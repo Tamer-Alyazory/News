@@ -1,0 +1,12 @@
+
+php artisan make:controller name --force // احزف الكنترولر القديم وانشئ كونترولر جديد
+CRUD:
+Create: save data and sow form
+Read: index data -> all data
+      show data -> one data
+Updata: show form and save data
+Delete: Delete.
+
+1- Define route :  Route::get('/Home',[ControllerNameController::class , 'home'])->name('home);
+2- Create controller php artisan make:controller ControllerName 
+3- Create method to each route
