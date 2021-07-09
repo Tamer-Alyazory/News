@@ -42,7 +42,7 @@
                                                 <th>Name</th>
                                                 <th>email</th>
                                                 <th>mobile</th>
-                                                <th>password</th>
+                                                {{-- <th>password</th> --}}
                                                 <th>status</th>
                                                 <th>gender</th>
                                                 {{-- <th>Created At</th>
@@ -52,33 +52,33 @@
                                         </thead>
                                         <tbody>
 
-                                            @foreach ($admin as $admins)
+                                            @foreach ($admins as $admin)
                                             <tr>
-                                                <td>{{$admins->id}}</td>
-                                                <td>{{$admins->name}}</td>
+                                                <td>{{$admin->id}}</td>
+                                                <td>{{$admin->name}}</td>
                                                
-                                                <td>{{$admins->email}}</td>
-                                                <td>{{$admins->mobile}}</td>   
+                                                <td>{{$admin->email}}</td>
+                                                <td>{{$admin->mobile}}</td>   
   
                                                 <td>
-                                                    @if ($admins->status)
-                                                    <span class="badge bg-success">{{$admins->active_status}}</span>
+                                                    @if ($admin->status)
+                                                    <span class="badge bg-success">{{$admin->active_status}}</span>
                                                     @else
-                                                    <span class="badge bg-danger">{{$admins->active_status}}</span>
+                                                    <span class="badge bg-danger">{{$admin->active_status}}</span>
                                                     @endif
                                                     </td>             
-                                                <td>{{$admins->gender}}</td>     
+                                                <td>{{$admin->gender}}</td>     
   
-                                                <td>{{$admins->created_at}}</td>
-                                                <td>{{$admins->updated_at}}</td>   
+                                                {{-- <td>{{$admins->created_at}}</td>
+                                                <td>{{$admins->updated_at}}</td>    --}}
 
                                                 <td> 
                                                     <div class="btn-group">
-                                                        <a href="{{route('admins.edit', $admins->id)}}" class="btn btn-info">
+                                                        <a href="{{route('admins.edit', $admin->id)}}" class="btn btn-info">
                                                           <i class="fas fa-edit"></i>
                                                         </a>
                                                       
-                                                    <a href="#" onclick="performDestroy({{$admins->id}}, this)" class="btn btn-danger">
+                                                    <a href="#" onclick="performDestroy({{$admin->id}}, this)" class="btn btn-danger">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </a>
                                                     

@@ -140,7 +140,7 @@
           email: document.getElementById('email').value,
           mobile: document.getElementById('mobile').value,
           // status: document.getElementById('Active').checked? "Active":"InActive".value,
-          gender: document.getElementById('male').checked? "M":"F".value,
+          gender: document.getElementById('Female').checked? "M":"F".value,
           // formData.append('gender',document.getElementById('male').checked? "M":"F");
         };
           store('/cms/admin/admins', data);

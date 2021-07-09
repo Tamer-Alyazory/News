@@ -5,11 +5,13 @@ namespace App\Models;
 use App\Http\Middleware\Authenticate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
-class admin extends Model
+class admin extends Authenticatable
 
 {
-    use HasFactory;
+    use HasFactory , HasRoles;
     protected $guarded=[];
     protected $appends =['active-status'];
 
@@ -17,6 +19,10 @@ class admin extends Model
     public function getActiveStatusAttribute()
     {
         return $this->status ? 'Active' : 'InActive';
+    }
+    public function user (){
+
+        return $this->morphOne(User::class , 'actor','actor_type' , 'actor_id', 'id');
     }
    
 //     public function article() {

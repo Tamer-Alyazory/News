@@ -215,14 +215,11 @@
               </li>
            
             </ul>
-          </li>
-        
-
+          </li>        
           <li class="nav-header">Roles & Permissions</li>
-          {{-- <li class="nav-item">
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-briefcase"></i>
-
               <p>
                 Roles
                 <i class="fas fa-angle-left right"></i>
@@ -268,7 +265,7 @@
               </li>
               
             </ul>
-          </li> --}}
+          </li>
 
           <li class="nav-header">Human Resources</li>
           <li class="nav-item">
@@ -328,8 +325,6 @@
           {{-- @endcanany --}}
           <li class="nav-header">Content Managment</li>
           
-       
-
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
@@ -384,7 +379,33 @@
               {{-- @endcan --}}
             </ul>
           </li>
-        
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Articles
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              {{-- @can('Index-Professions') --}}
+              <li class="nav-item">
+                <a href="{{route('articles.index')}}" class="nav-link">
+                  <i class="fas fa-list nav-icon"></i>
+                  <p>Index</p>
+                </a>
+              </li>
+              {{-- @endcan --}}
+              {{-- @can('Create-Professions') --}}
+              <li class="nav-item">
+                <a href="{{route('articles.create')}}" class="nav-link">
+                  <i class="fas fa-plus-square nav-icon"></i>
+                  <p>Create</p>
+                </a>
+              </li>
+              {{-- @endcan --}}
+            </ul>
+          </li>
           <li class="nav-header">Setting</li>
           <li class="nav-item">
             <a href="iframe.html" class="nav-link">
@@ -416,6 +437,12 @@
             <a href="iframe.html" class="nav-link">
               <i class="nav-icon fas fa-unlock-alt"></i>
               <p>Change Password</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('cms.auth.logout')}}" class="nav-link">
+              <i class="nav-icon fas fa-unlock-alt"></i>
+              <p> Logout </p>
             </a>
           </li>
 

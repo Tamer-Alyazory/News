@@ -43,7 +43,7 @@
                                                 <th>email</th>
                                                 <th>mobile</th>
                                                 <th>gender</th>
-                                                <th>password</th>
+                                                {{-- <th>password</th> --}}
                                                 <th>status</th>
                                                 {{-- <th>Created At</th>
                                                 <th>Updated At</th> --}}

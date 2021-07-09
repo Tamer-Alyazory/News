@@ -50,23 +50,18 @@
                                         </thead>
                                         <tbody>
 
-                                            @foreach ($categories as $category)
+                                            @foreach ($article as $articles)
                                             <tr>
-                                                <td>{{$category->id}}</td>
-                                                <td>{{$category->name}}</td>
-                                                <td>{{$category->description}}</td>
-                                                <td>
-                                                    @if ($category->status)
-                                                    <span class="badge bg-success">{{$category->active_status}}</span>
-                                                    @else
-                                                    <span class="badge bg-danger">{{$category->active_status}}</span>
-                                                    @endif
-                                                    </td>                                           
-                                                <td>{{$category->created_at}}</td>
-                                                <td>{{$category->updated_at}}</td>        
+                                                <td>{{$article->id}}</td>
+                                                <td>{{$article->title}}</td>
+                                                <td>{{$article->short_description}}</td>
+                                                <td>{{$article->full_description}}</td>
+                                                                                         
+                                                <td>{{$article->created_at}}</td>
+                                                <td>{{$article->updated_at}}</td>        
                                                 <td> 
                                                     <div class="btn-group">
-                                                        <a href="{{route('categories.edit', $category->id)}}" class="btn btn-info">
+                                                        <a href="{{route('articles.edit', $article->id)}}" class="btn btn-info">
                                                           <i class="fas fa-edit"></i>
                                                         </a>
                                                         {{-- <form action="{{route('specialities.destroy' , $profession->id)}}" method="POST">
@@ -76,7 +71,7 @@
                                                           <i class="fas fa-trash-alt"></i>
                                                         </button>
                                                     </form> --}}
-                                                    <a href="#" onclick="performDestroy({{$category->id}}, this)" class="btn btn-danger">
+                                                    <a href="#" onclick="performDestroy({{$article->id}}, this)" class="btn btn-danger">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </a>
                                                     
@@ -106,7 +101,7 @@
     <script>
 
            function performDestroy(id , ref){
-            confirmDestroy('/cms/admin/categories/'+id,ref);
+            confirmDestroy('/cms/admin/articles/'+id,ref);
            }
 
         </script>

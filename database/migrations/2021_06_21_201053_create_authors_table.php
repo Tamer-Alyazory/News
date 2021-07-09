@@ -15,14 +15,14 @@ class CreateAuthorsTable extends Migration
     {
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 45);
+            //  $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('mobile', 15);
-            $table->enum('gender', ['M', 'F']);
+            // $table->string('mobile', 15);
+            // $table->enum('gender', ['M', 'F']);
             $table->string('password');
             $table->rememberToken();
-            $table->enum('status', ['Active', 'InActive']);
+            // $table->enum('status', ['Active', 'InActive']);
 
             // $table->boolean('status')->default('true');
             $table->timestamps();

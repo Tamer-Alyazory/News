@@ -1,10 +1,10 @@
 @extends('cms.paerent')
 
-@section('title','Category')
+@section('title','Article')
 
-@section('page-title','Categories Create')
+@section('page-title','Articles Create')
 
-@section('small-title','Category')
+@section('small-title','Article')
     
 @section('styles')
 
@@ -22,58 +22,53 @@
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Data of Category</h3>
+                  <h3 class="card-title">Data of Article</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form id="create_form"> 
-                    @csrf
-                  <div class="card-body">
+                    @csrf            
+                    <div class="card-body">    
                     <div class="form-group">
-                      <label>speciality</label>
-                      <select class="form-control speciality_id" style="width: 100%;" id="speciality_id">
-                        @foreach ($specialities as $speciality )
-
-                        <option value="{{ $speciality->id }}">{{ $speciality->title_en }}</option>
-                          
+                      <label>category</label>
+                      <select class="form-control category_id" style="width: 100%;" id="category_id">
+                        @foreach ($categories as $category )
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
-                       
-                        
                       </select>
                     </div>
-
-{{-- 
                     <div class="form-group">
-                      <label>Profession</label>
-                      <select class="form-control profession_id" style="width: 100%;" id="profession_id">
-                        @foreach ($professions as $profession )
-
-                        <option value="{{ $profession->id }}">{{ $profession->name }}</option>
-                          
+                      <label>author</label>
+                      <select class="form-control author_id" style="width: 100%;" id="author_id">
+                        @foreach ($authors as $author )
+                        <option value="{{ $author->id }}">{{ $author->email }}</option>
                         @endforeach
-                       
-                        
                       </select>
-                    </div> --}}
-
-                    <div class="form-group">
-                      <label for="name">Name</label>
-                      <input type="text" name="name" class="form-control" id="name" placeholder="Enter Name">
                     </div>
                     <div class="form-group">
-
-                      <label for="description">Size</label>
-                      <input type="text" name="description" class="form-control" id="description" placeholder="Enter description">
+                      <label>image</label>
+                      <select class="form-control image_id" style="width: 100%;" id="image_id">
+                        @foreach ($images as $image )
+                        <option value="{{ $image->id }}">{{ $image->name }}</option>
+                        @endforeach
+                      </select>
+                    </div>              
+                    <div class="form-group">
+                      <label for="title">Title</label>
+                      <input type="text" name="title" class="form-control" id="title" placeholder="Enter title of article">
                     </div>
                     <div class="form-group">
-
-                      <div class="form-check">
-                        <input type="checkbox" name="status" class="form-check-input" id="status">
-                        <label class="form-check-label" for="status">Active</label>
-                      </div>
+                      <label for="short_description">short_description</label>
+                      <input type="text" name="short_description" class="form-control" id="short_description" placeholder="Enter short_description">
                     </div>
+                    <div class="form-group">
+                      <label for="full_description">full_description</label>
+                      <input type="text" name="full_description" class="form-control" id="full_description" placeholder="Enter full_description">
                     </div>
-
+                    
+                    </div>
+                  </div>
+                </div>
                   </div>
                   <!-- /.card-body -->
   
@@ -95,18 +90,24 @@
 <script src="{{ asset('cms/plugins/select2/js/select2.full.min.js') }}"></script>
 
     <script>
-    // $('.images_id').select2({
-    //   theme: 'bootstrap4'
-    // })
+    $('.category_id').select2({
+      theme: 'bootstrap4'
+    })
+    $('.author_id').select2({
+      theme: 'bootstrap4'
+    })
+    $('.image_id').select2({
+      theme: 'bootstrap4'
+    })
     function performStore(){
         let formData = new FormData
         {
-          formData.append('name' , document.getElementById('name').value);
-          formData.append('description' , document.getElementById('description').value);
-          formData.append('status' , document.getElementById('status').value);
+          formData.append('title' , document.getElementById('title').value);
+          formData.append('short_description' , document.getElementById('short_description').value);
+          formData.append('full_description' , document.getElementById('full_description').value);
 
         } 
-        store('/cms/admin/categories',formData);
+        store('/cms/admin/articles',formData);
     }
       </script>
 @endsection

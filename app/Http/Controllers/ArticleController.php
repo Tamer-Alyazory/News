@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\article;
+use App\Models\author;
+use App\Models\category;
+use App\Models\image;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -15,6 +18,8 @@ class ArticleController extends Controller
     public function index()
     {
         //
+        $data = article::all();
+        return response()->view('cms.articles.index' , ['article'=>$data]); 
     }
 
     /**
@@ -24,7 +29,11 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        $categories = category::all();
+        $authors = author::all();
+        $images = image::all();
+        return response()->view('cms.articles.create' , ['categories'=>$categories , 'authors'=>$authors , 'images'=>$images]) ;
+
     }
 
     /**
@@ -35,7 +44,31 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator($request->all(), [
+            'title'=>"required|min:3|max:25",
+            'short_description'=>"required",
+            'full_description'=>"required",
+
+        ]);
+
+        if (!$validator->fails()) {
+            $article =new article();          
+            $article->title = $request->get('title');
+            $article->short_description = $request->get('short_description');
+            $article->full_description = $request->get('full_description');
+
+
+
+            $isSaved = $article->save();
+            if ($isSaved) {
+               
+                return response()->json(['message' => $isSaved ? "Saved successfully" : "Failed to save"], $isSaved ? 201 : 400);
+            } else {
+                return response()->json(['message' => "Failed to save"], 400);
+            }
+        } else {
+            return response()->json(['message' => $validator->getMessageBag()->first()], 400);
+        }
     }
 
     /**

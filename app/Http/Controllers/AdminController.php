@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\admin;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
 {
@@ -15,8 +17,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $data = admin::all();
-        return response()->view('cms.admins.index' , ['admin'=>$data]); 
+        // $data = admin::all();
+        $admins = admin::with('user')->get();
+        return response()->view('cms.admins.index' , ['admins'=>$admins]); 
     }
 
     /**
@@ -26,7 +29,8 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return response()->view('cms.admins.create');
+        $roles = Role::where('guard_name', 'admin')->get();
+        return response()->view('cms.admins.create' , ['roles' => $roles]);
 
     }
 
@@ -46,16 +50,19 @@ class AdminController extends Controller
         ]);
 
         if (!$validator->fails()) {
-            $admin =new admin();          
+            $admin = new Admin();
             $admin->email = $request->get('email');
-            $admin->password = Hash::make("password");
-            $admin->name = $request->get('name'); 
-            $admin->mobile = $request->get('mobile');
-            $admin->gender = $request->get('gender');
-            // $admin->status = $request->get('status');
-            $isSaved = $admin->save();
+            $admin->password = Hash::make($request->get('password'));
+                $isSaved = $admin->save();
             if ($isSaved) {
-
+                // $role = Role::findById($request->get('role_id'));
+                // $admin->assignRole($role->name);
+                $user = new User();
+                $user->name = $request->get('name');
+                $user->mobile = $request->get('mobile');
+                $user->gender = $request->get('gender');
+                $user->actor()->associate($admin);
+                $isSaved = $user->save();
                 return response()->json(['message' => $isSaved ? "Saved successfully" : "Failed to save"], $isSaved ? 201 : 400);
             } else {
                 return response()->json(['message' => "Failed to save"], 400);

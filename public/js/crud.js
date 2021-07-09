@@ -1,12 +1,12 @@
 function store(url, data) {
     axios.post(url, data)
-        .then(function (response) {
+        .then(function(response) {
             console.log(response);
             if (document.getElementById('create_form') != undefined)
                 document.getElementById('create_form').reset();
             showToaster(response.data.message, true);
         })
-        .catch(function (error) {
+        .catch(function(error) {
             console.log("ERROR RESPONSE");
             console.log(error.response);
             showToaster(error.response.data.message, false);
@@ -15,12 +15,12 @@ function store(url, data) {
 
 function update(url, data, redirectUrl) {
     axios.put(url, data)
-        .then(function (response) {
+        .then(function(response) {
             console.log(response);
             if (redirectUrl != null)
-                window.location.href = redirectUrl;
+                window.location.href = '/cms/admin';
         })
-        .catch(function (error) {
+        .catch(function(error) {
             console.log(error.response);
             showToaster(error.response.data.message, false);
         });
@@ -45,18 +45,18 @@ function confirmDestroy(url, td) {
 
 function destroy(url, td) {
     axios.delete(url)
-        .then(function (response) {
+        .then(function(response) {
             // handle success
             console.log(response.data);
             td.closest('tr').remove();
             showToaster(response.data.message, true);
         })
-        .catch(function (error) {
+        .catch(function(error) {
             // handle error
             console.log(error.response);
             showToaster(error.response.data.message, false);
         })
-        .then(function () {
+        .then(function() {
             // always executed
         });
 }

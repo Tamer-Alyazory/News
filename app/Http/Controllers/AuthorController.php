@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\author;
 use App\Models\category;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class AuthorController extends Controller
 {
@@ -16,8 +18,10 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $data = author::all();
-        return response()->view('cms.authors.index' , ['authors'=>$data]); 
+        // $data = author::all();
+        $uthors = author::with('user')->get();
+
+        return response()->view('cms.authors.index' , ['authors'=>$uthors]); 
     }
 
     /**
@@ -28,8 +32,10 @@ class AuthorController extends Controller
     public function create()
     {
         $categories = category::all();
+        $roles = Role::where('guard_name', 'author')->get();
+
         // return response()->view('cms.authors.create',compact('categories'));
-        return response()->view('cms.authors.create',['categories'=>$categories]);
+        return response()->view('cms.authors.create',['categories'=>$categories ,  'roles' => $roles]);
 
 
     }
@@ -43,35 +49,28 @@ class AuthorController extends Controller
     public function store(Request $request)
     {
         $validator = Validator($request->all(), [
-            'category_id' => 'required|numeric|exists:categories,id',
             'name'=>"required|min:3|max:25",
-            'email' => 'required|email|unique:admins,email',
+            'email' => 'required|email|unique:authors',
             'mobile' => 'required|numeric',
             'gender' => 'required|string|max:1|in:M,F',
-            // 'author_id' => 'required|numeric|exists:authors,id',
-
-            
-            // 'status'=>"in:Active",
         ]);
 
         if (!$validator->fails()) {
-            $author =new author();          
-            $author->email = $request->get('email');
-            $author->password = Hash::make("password");
-            $author->name = $request->get('name'); 
-            $author->mobile = $request->get('mobile');
-            $author->gender = $request->get('gender');
+            $author = new author();
+            $author->email = $request->email;
+            $author->password = Hash::make($request->get('password'));
             
-            // dd($request->get('category_id'));
-            $isSaved = $author->save();
-
-            
-            // تسنخدم في علاقة المني تو مني
-            $author->categories()->attach($request->get('category_id'));
-           
-
+                $isSaved = $author->save();
             if ($isSaved) {
                 
+                // $role = Role::findById($request->get('role_id'));
+                // $admin->assignRole($role->name);
+                $user = new User();
+                $user->name = $request->get('name');
+                $user->mobile = $request->get('mobile');
+                $user->gender = $request->get('gender');
+                $user->actor()->associate($author);
+                $isSaved = $user->save();
                 return response()->json(['message' => $isSaved ? "Saved successfully" : "Failed to save"], $isSaved ? 201 : 400);
             } else {
                 return response()->json(['message' => "Failed to save"], 400);

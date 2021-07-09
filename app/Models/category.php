@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Traits\HasRoles;
 
 class category extends Model
 {
-    use HasFactory;
+    use HasFactory , HasRoles;
     protected $appends =['active-status'];
 
     
@@ -16,7 +17,7 @@ class category extends Model
         return $this->status ? 'Active' : 'InActive';
     }
     public function article(){
-        return $this->hasMany(article::class, 'categories_id','id');         
+        return $this->hasMany(article::class, 'category_id','id');         
         
     }
  

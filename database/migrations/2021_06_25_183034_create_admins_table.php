@@ -15,15 +15,15 @@ class CreateAdminsTable extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 45);
+            // $table->string('name', 45);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('mobile', 15);
+            // $table->string('mobile', 15);
             $table->string('password');
             // $table->boolean('status')->default('false');
-            $table->enum('status', ['Active', 'InActive']);
+            // $table->enum('status', ['Active', 'InActive']);
 
-            $table->enum('gender', ['M', 'F']);
+            // $table->enum('gender', ['M', 'F']);
             $table->rememberToken();
             $table->timestamps();
         });

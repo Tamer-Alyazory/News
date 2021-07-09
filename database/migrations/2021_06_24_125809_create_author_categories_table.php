@@ -15,8 +15,8 @@ class CreateAuthorCategoriesTable extends Migration
     {
         Schema::create('author_categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('categories_id');
-            $table->foreign('categories_id')->on('categories')->references('id');
+            $table->foreignId('category_id');
+            $table->foreign('category_id')->on('categories')->references('id');
             $table->foreignId('auther_id');
             $table->foreign('auther_id')->on('auther')->references('id');
             $table->timestamps();
