@@ -1,4 +1,4 @@
-@extends('front.master')
+@extends('news.master')
 
 @section('title','contact')
 @section('content')
@@ -85,12 +85,6 @@
     </div>
     <!-- /.container -->
 
-    <!-- Footer -->
-    <footer class="py-5 bg-dark">
-      <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Momen Sisalem 2018</p>
-      </div>
-      <!-- /.container -->
 
 @endsection
 
@@ -98,6 +92,5 @@
 <script src="{{ asset('front/js/jqBootstrapValidation.js') }}"></script>
 <script src="{{ asset('front/js/contact_me.js') }}"></script>
 @endsection
- 
 
-  
+

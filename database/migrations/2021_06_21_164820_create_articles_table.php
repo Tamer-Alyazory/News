@@ -23,10 +23,8 @@ class CreateArticlesTable extends Migration
             $table->foreignId('author_id');
             $table->foreign('author_id')->on('authors')->references('id');
             $table->string('seen_count',45);
-            $table->foreignId('image_id');
-            $table->foreign('image_id')->on('images')->references('id');
-
-
+            $table->string('image_id');
+         
             $table->timestamps();
         });
     }

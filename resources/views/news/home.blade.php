@@ -53,28 +53,30 @@
         <!-- category Section -->
         @foreach ($category as $cat)
         <h3 class="my-4">{{ $cat->name }}</h3>
-        
-      
+
+
 
         <div class="row">
-            <div class="col-lg-4 col-sm-6 portfolio-item">
-                <div class="card h-100">
-                    <a href="#"><img class="card-img-top" src="{{ asset('front/img/1.jpg') }}" alt=""></a>
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <a href="#">news title One</a>
-                        </h4>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
-                            aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt,
-                            dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="newsdetailes.html" class="btn btn-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
-          
-        </div>
+            @foreach ($article as $articals)
+               @if ($articals->category_id == $cat->id)
+                  <div class="col-lg-3 col-sm-6 portfolio-item">
+                      <div class="card h-100">
+                          <a href="#"><img class="card-img-top" src="{{Storage::url('image/article/'.$articals->image_id)}}" alt=""></a>
+                          
+                          <div class="card-body">
+                              <h4 class="card-title">
+                                  <a href="#">{{$articals->title}}</a>
+                              </h4>
+                              <p class="card-text">{{$articals->short_description}}</p>
+                          </div>
+                          <div class="card-footer">
+                              <a href="{{route('news.allnews',$articals->id)}}" class="btn btn-primary">Learn More</a>
+                          </div>
+                      </div>
+                  </div>
+               @endif
+              @endforeach
+              </div>
         <div align="center"><a class="btn btn-success" href="{{route('news.allnews',$cat->id)}}">more news</a></div>
         @endforeach
     </div>

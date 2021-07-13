@@ -15,17 +15,21 @@ class admin extends Authenticatable
     protected $guarded=[];
     protected $appends =['active-status'];
 
-    
+
     public function getActiveStatusAttribute()
     {
         return $this->status ? 'Active' : 'InActive';
     }
-    public function user (){
-
-        return $this->morphOne(User::class , 'actor','actor_type' , 'actor_id', 'id');
+    public function getFullNameAttribute()
+    {
+        return $this->user->name;
     }
-   
+    public function user()
+    {
+        return $this->morphOne(User::class, 'actor', 'actor_type', 'actor_id', 'id');
+    }
+
 //     public function article() {
-//         return $this->hasMany(article::class);   
+//         return $this->hasMany(article::class);
 // }
 }

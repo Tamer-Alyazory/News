@@ -15,7 +15,7 @@ class ImageController extends Controller
     public function index()
     {
         $data = image::all();
-        return response()->view('cms.images.index' , ['images'=>$data]); 
+        return response()->view('cms.images.index' , ['images'=>$data]);
     }
 
     /**
@@ -38,27 +38,28 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $validator = Validator($request->all(), [
-            'umage_url'=>"required|image|max:2048|mimes:png,jpg,jpeg",   
+            'umage_url'=>"required|image|max:2048|mimes:png,jpg,jpeg",
             'name'=>"required|min:3|max:25",
             'size'=>"required",
         ]);
 
         if (!$validator->fails()) {
-            $image =new image();          
+            $image =new image();
             $umage_url = $request->file('umage_url');
             $imageName = time() . '_Image.' . $umage_url->getClientOriginalExtension();
             $umage_url->storeAs('images', $imageName, ['disk' => 'public']);
             $image->umage_url = $imageName;
             $image->name = $request->get('name');
             $image->size = $request->get('size');
+            
             // $image->status = $request->get('status');
 
 
             $isSaved = $image->save();
             if ($isSaved) {
-             
+
 
                 return response()->json(['message' => $isSaved ? "Saved successfully" : "Failed to save"], $isSaved ? 201 : 400);
             } else {

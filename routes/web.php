@@ -70,8 +70,16 @@ Route::prefix('cms/admin')->middleware('auth:admin,author')->group(function(){
 Route::group(['namespace' => 'Front'],function() {
     Route::get('/home', [homeController::class, 'index'])->name('news.home');
     Route::get('/allnews/{id}', [allNewsController::class, 'allNews'])->name('news.allnews');
+    Route::get('/contact', [homeController::class , 'contact'])->name('news.contact');
+
 
   });
+
 // Route::get('/user/{id}' , function($id){
 //     return 'user id: '.$id;
 // });
+Route::get('/check/{name}', [homeController::class , 'check'])->middleware('check');
+
+
+
+

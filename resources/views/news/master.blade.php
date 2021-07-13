@@ -40,12 +40,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('news.allnews' , ['id' => 'category->id']) }}">International news</a>
                 </li>  <li class="nav-item">
-                    <a class="nav-link" href="{{ route('news.allnews' , ['id' => 'category->id']) }}">sport news</a> 
+                    <a class="nav-link" href="{{ route('news.allnews' , ['id' => 'category->id']) }}">sport news</a>
                  </li>
 
-                {{-- <li class="nav-item">
-                    <a class="nav-link" href="{{route('contact')}}">Contact</a>
-                </li> --}}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('news.contact')}}">Contact</a>
+                </li>
 
             </ul>
         </div>

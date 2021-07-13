@@ -19,7 +19,7 @@ class AdminController extends Controller
     {
         // $data = admin::all();
         $admins = admin::with('user')->get();
-        return response()->view('cms.admins.index' , ['admins'=>$admins]); 
+        return response()->view('cms.admins.index', ['admins' => $admins]);
     }
 
     /**

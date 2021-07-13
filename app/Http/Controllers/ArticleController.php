@@ -18,8 +18,8 @@ class ArticleController extends Controller
     public function index()
     {
         //
-        $data = article::all();
-        return response()->view('cms.articles.index' , ['article'=>$data]); 
+        $articles = article::all();
+        return response()->view('cms.articles.index' , ['articles'=>$articles]);
     }
 
     /**
@@ -52,16 +52,27 @@ class ArticleController extends Controller
         ]);
 
         if (!$validator->fails()) {
-            $article =new article();          
+            $article =new article();
+            $article->category_id = $request->get('category_id');
+            $article->author_id = $request->get('author_id');
+            // $article->image_id = $request->get('image_id');
             $article->title = $request->get('title');
             $article->short_description = $request->get('short_description');
             $article->full_description = $request->get('full_description');
+
+            $image_id = $request->file('image_id');
+
+            $imageName = time() . '_article.' . $image_id->getClientOriginalExtension();
+
+            $image_id->storeAs('image/article', $imageName, ['disk' => 'public']);
+
+            $article->image_id = $imageName;
 
 
 
             $isSaved = $article->save();
             if ($isSaved) {
-               
+
                 return response()->json(['message' => $isSaved ? "Saved successfully" : "Failed to save"], $isSaved ? 201 : 400);
             } else {
                 return response()->json(['message' => "Failed to save"], 400);

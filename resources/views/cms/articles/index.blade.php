@@ -5,17 +5,17 @@
 @section('page-title','Index')
 
 @section('small-title','Articles Index')
-    
+
 @section('styles')
-    
+
 @endsection
-    
+
 @section('content')
 <section class="content">
     <div class="container-fluid">
 
         <div class="row">
-            
+
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
@@ -42,7 +42,7 @@
                                                 <th>Title</th>
                                                 <th>Short Description</th>
                                                 <th>Full Description</th>
-                                                
+
                                                 {{-- <th>Created At</th>
                                                 <th>Updated At</th> --}}
                                                 <th>Setting</th>
@@ -50,16 +50,16 @@
                                         </thead>
                                         <tbody>
 
-                                            @foreach ($article as $articles)
+                                            @foreach ($articles as $article)
                                             <tr>
                                                 <td>{{$article->id}}</td>
                                                 <td>{{$article->title}}</td>
                                                 <td>{{$article->short_description}}</td>
                                                 <td>{{$article->full_description}}</td>
-                                                                                         
+
                                                 <td>{{$article->created_at}}</td>
-                                                <td>{{$article->updated_at}}</td>        
-                                                <td> 
+                                                <td>{{$article->updated_at}}</td>
+                                                <td>
                                                     <div class="btn-group">
                                                         <a href="{{route('articles.edit', $article->id)}}" class="btn btn-info">
                                                           <i class="fas fa-edit"></i>
@@ -74,14 +74,14 @@
                                                     <a href="#" onclick="performDestroy({{$article->id}}, this)" class="btn btn-danger">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </a>
-                                                    
+
                                                       </div>
                                                 </td>
                                             </tr>
-                                           
+
                                             @endforeach
-                                            
-                                           
+
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -94,7 +94,7 @@
 </section>
 @endsection
 
- @section('scripts') 
+ @section('scripts')
 {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> --}}
 

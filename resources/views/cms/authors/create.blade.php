@@ -5,7 +5,7 @@
 @section('page-title','Authors Create')
 
 @section('small-title','Author')
-    
+
 @section('styles')
 
 <link rel="stylesheet" href="{{ asset('cms/plugins/select2/css/select2.min.css') }}">
@@ -26,7 +26,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form id="create_form"> 
+                <form id="create_form">
                     @csrf
                   <div class="card-body">
                     <div class="form-group">
@@ -35,10 +35,10 @@
                         @foreach ($categories as $category )
 
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
-                          
+
                         @endforeach
-                       
-                        
+
+
                       </select>
                     </div>
                     <div class="form-group">
@@ -85,10 +85,10 @@
                         @foreach ($authors as $author )
 
                         <option value="{{ $author->id }}">{{ $author->name }}</option>
-                          
+
                         @endforeach
-                       
-                        
+
+
                       </select>
                     </div> --}}
 
@@ -99,13 +99,13 @@
 
                   </div>
                   <!-- /.card-body -->
-  
+
                   <div class="card-footer">
                     <button type="button" onclick="performStore()" class="btn btn-primary">Store</button>
                   </div>
                 </form>
               </div>
-              <!-- /.card -->          
+              <!-- /.card -->
           <!-- /.row -->
         </div><!-- /.container-fluid -->
       </section>
@@ -131,10 +131,10 @@
             email: document.getElementById('email').value,
             mobile: document.getElementById('mobile').value,
           // status: document.getElementById('Active').checked? "Active":"InActive".value,
-            gender: document.getElementById('male').checked? "M":"F".value,
+            gender: document.getElementById('male').checked? "M":"F",
             // authors_id: document.getElementById('authors').value,
-       
-        } 
+
+        }
         store('/cms/admin/authors',data);
     }
       </script>

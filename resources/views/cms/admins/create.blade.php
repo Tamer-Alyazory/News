@@ -5,7 +5,7 @@
 @section('page-title','Admin Create')
 
 @section('small-title','Admin')
-    
+
 @section('styles')
 <link rel="stylesheet" href="{{ asset('cms/plugins/select2/css/select2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('cms/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
@@ -25,10 +25,10 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form id="create_form"> 
+                <form id="create_form">
                     @csrf
                   <div class="card-body">
-                   
+
                     <div class="form-group">
                       <label for="name">Name</label>
                       <input type="text" name="name" class="form-control" id="name" placeholder="Enter Name">
@@ -79,7 +79,7 @@
                     </div>
                 </div>
             </div> --}}
-                    
+
                     <div class="form-group">
 
                       <div class="form-check">
@@ -89,9 +89,9 @@
                     </div>
                     </div>
 
-                   </div> 
+                   </div>
                   <!-- /.card-body -->
-  
+
                   <div class="card-footer">
                     <button type="button" onclick="performStore()" class="btn btn-primary">Store</button>
                   </div>
@@ -100,9 +100,9 @@
             </div>
 
               <!-- /.card -->
-  
-            
-            
+
+
+
           <!-- /.row -->
         </div><!-- /.container-fluid -->
       </section>
@@ -116,13 +116,11 @@
 <script src="{{ asset('js/crud.js') }}"></script>
 
     <script>
-    // $('.profesiion_id').select2({
-    //   theme: 'bootstrap4'
-    // })
+
     // function performStore(){
     //     let formData = new FormData();
-        
-   
+
+
     //       formData.append('name' , document.getElementById('name').value);
     //       formData.append('email' , document.getElementById('email').value);
     //       formData.append('mobile' , document.getElementById('mobile').value);
@@ -130,17 +128,17 @@
     //       formData.append('gender' , document.getElementById('male').checked? "M":"F");
 
 
-        
+
     //     store('/cms/admin/admins',formData);
     // }
     function performStore(){
-        
+
         let data = {
           name: document.getElementById('name').value,
           email: document.getElementById('email').value,
           mobile: document.getElementById('mobile').value,
           // status: document.getElementById('Active').checked? "Active":"InActive".value,
-          gender: document.getElementById('Female').checked? "M":"F".value,
+          gender: document.getElementById('male').checked? "M":"F",
           // formData.append('gender',document.getElementById('male').checked? "M":"F");
         };
           store('/cms/admin/admins', data);
